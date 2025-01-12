@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"  />-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
 </head>
 <body>
@@ -90,15 +91,22 @@
               <h5 class="card-title mb-5">[[${user.firstName}]] [[${user.lastName}]]</h5>
               <!-- ID -->
               <div class="d-flex mb-2">
-                <strong class="me-3 text-start ms-5 mb-2" style="width: 100px;">ID</strong><span>[[${user.id}]]</span>
+                <strong class="me-3 text-start ms-5 mb-2" style="width: 100px;">
+                  <i class="fas fa-id-card me-2"></i> ID
+                </strong><span>[[${user.id}]]</span>
               </div>
               <!-- Email -->
               <div class="d-flex mb-2">
-                <strong class="me-3 text-start ms-5 mb-2" style="width: 100px;">Email</strong><span>[[${user.email}]]</span>
+                <strong class="me-3 text-start ms-5 mb-2" style="width: 100px;">
+                  <i class="fas fa-envelope me-2"></i> Email</strong>
+                <span>[[${user.email}]]</span>
               </div>
               <!-- Enabled -->
               <div class="d-flex">
-                <strong class="me-3 text-start ms-5 mb-2" style="width: 100px;">Enabled</strong><span>[[${user.enabled}]]</span>
+                <strong class="me-3 text-start ms-5 mb-2" style="width: 100px;">
+                  <i class="fas fa-check-circle me-2"></i>Enabled
+                </strong>
+                <span>[[${user.enabled}]]</span>
               </div>
               <div class="mt-5">
                 <button class="btn btn-warning mr-3" type="button" th:formaction="@{'/users/update/' + ${user.id}}" onclick="location.href=this.formAction">Edit</button>
@@ -114,24 +122,45 @@
 <!-- 引入 Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // JavaScript 切換視圖
-  const toggleButton = document.getElementById('toggleView');
-  const tableView = document.getElementById('tableView');
-  const cardView = document.getElementById('cardView');
+  // DOM 元素
+  const toggleButton = document.getElementById("toggleView");
+  const tableView = document.getElementById("tableView");
+  const cardView = document.getElementById("cardView");
 
-  toggleButton.addEventListener('click', () => {
-    if (tableView.classList.contains('d-none')) {
-      // 顯示表格視圖
-      tableView.classList.remove('d-none');
-      cardView.classList.add('d-none');
-      toggleButton.textContent = 'Switch to Card View';
+  // 加載時設置視圖
+  document.addEventListener("DOMContentLoaded", () => {
+    const savedView = localStorage.getItem("viewPreference");
+    if (savedView === "card") {
+      showCardView();
     } else {
-      // 顯示卡片視圖
-      tableView.classList.add('d-none');
-      cardView.classList.remove('d-none');
-      toggleButton.textContent = 'Switch to Table View';
+      showTableView();
     }
   });
+
+  // 切換視圖
+  toggleButton.addEventListener("click", () => {
+    if (tableView.classList.contains("d-none")) {
+      showTableView();
+      localStorage.setItem("viewPreference", "table"); // 保存為 Table View
+    } else {
+      showCardView();
+      localStorage.setItem("viewPreference", "card"); // 保存為 Card View
+    }
+  });
+
+  // 顯示 Table View
+  function showTableView() {
+    tableView.classList.remove("d-none");
+    cardView.classList.add("d-none");
+    toggleButton.textContent = "Switch to Card View";
+  }
+
+  // 顯示 Card View
+  function showCardView() {
+    tableView.classList.add("d-none");
+    cardView.classList.remove("d-none");
+    toggleButton.textContent = "Switch to Table View";
+  }
 </script>
 </body>
 </html>
