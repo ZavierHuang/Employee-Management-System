@@ -1,0 +1,37 @@
+<!-- src/main/resources/templates/fragments/card_view.html -->
+<div th:fragment="cardView">
+    <div id="cardView" class="row mt-3 d-none">
+        <th:block th:each="user : ${listUsers}">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title mb-5">[[${user.firstName}]] [[${user.lastName}]]</h5>
+                        <!-- ID -->
+                        <div class="d-flex mb-2">
+                            <strong class="me-3 text-start ms-5 mb-2" style="width: 100px;">
+                                <i class="fas fa-id-card me-2"></i> ID
+                            </strong><span>[[${user.id}]]</span>
+                        </div>
+                        <!-- Email -->
+                        <div class="d-flex mb-2">
+                            <strong class="me-3 text-start ms-5 mb-2" style="width: 100px;">
+                                <i class="fas fa-envelope me-2"></i> Email
+                            </strong><span>[[${user.email}]]</span>
+                        </div>
+                        <!-- Enabled -->
+                        <div class="d-flex">
+                            <strong class="me-3 text-start ms-5 mb-2" style="width: 100px;">
+                                <i class="fas fa-check-circle me-2"></i>Enabled
+                            </strong>
+                            <span>[[${user.enabled}]]</span>
+                        </div>
+                        <div class="mt-5">
+                            <button class="btn btn-warning mr-3" type="button" th:formaction="@{'/users/update/' + ${user.id}}" onclick="location.href=this.formAction">Edit</button>
+                            <button class="btn btn-danger" type="button" th:formaction="@{'/users/delete/' + ${user.id}}" onclick="location.href=this.formAction">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
