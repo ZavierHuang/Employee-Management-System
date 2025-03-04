@@ -13,8 +13,14 @@
                             </strong><span>[[${user.id}]]</span>
                         </div>
                         <!-- Email -->
-                        <div class="d-flex mb-2">
-                            <strong class="me-3 text-start ms-5 mb-2" style="width: 100px;">
+                        <div class="d-flex mb-2 flex-wrap">
+                            <strong class="me-3 text-start ms-5 mb-2"
+                                    style="
+                                        width: 100px;
+                                        overflow: hidden;
+                                        white-space: nowrap;
+                                        text-overflow: ellipsis;
+                                    ">
                                 <i class="fas fa-envelope me-2"></i> Email
                             </strong><span>[[${user.email}]]</span>
                         </div>
