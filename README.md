@@ -16,5 +16,7 @@
 ### Card View
 ![image](https://i.imgur.com/SKvKxv5.png)
 ### Add Item Form
-![image](https://i.imgur.com/r6cHz2l.png)
+<p align="center">
+  <img src='https://i.imgur.com/r6cHz2l.png' width="400px" height="350px" />
+</p>
 
